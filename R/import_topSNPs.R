@@ -132,9 +132,10 @@ import_topSNPs <- function(topSS,
         if(!"P" %in% colnames(topSNPs)) topSNPs$P <- NA
         if(!"P" %in% colnames(topSNPs)) topSNPs$P <- NA
         grouping_vars <- grouping_vars[grouping_vars %in% colnames(topSNPs)]
+      topSNPs <- topSNPs[order(topSNPs$P, topSNPs$Effect),]
         topSNPs <-  
             topSNPs |>
-             dplyr::arrange(P, dplyr::desc(Effect)) |>
+             # dplyr::arrange(P, dplyr::desc(Effect)) |>
              dplyr::group_by_at(.vars = grouping_vars) |>
              dplyr::slice(1) |> 
              # replace(.=="NA", NA) |>
